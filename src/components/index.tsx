@@ -1,8 +1,9 @@
 import Button from "./Button";
 import Card from "./Card";
 import Search from "./Search";
-import Modal from "./Modal";
+import Nav from "./Nav";
 
 
 
-export { Button, Card, Search, Modal,  };
+
+export { Button, Card, Search, Nav};

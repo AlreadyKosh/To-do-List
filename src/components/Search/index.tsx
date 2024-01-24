@@ -1,29 +1,33 @@
-import React, { ReactNode, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import styles from "./Search.module.scss";
-import { RiDeleteBinLine } from "react-icons/ri";
 import { HiMagnifyingGlass } from "react-icons/hi2" ;
-import Logo from "../../assets/img/image8.png";
+import { ITarefas } from "../../types/Tarefa";
+
 
 interface ISearch {
   placeholder: string;
-  value: string;
-  onChange: (e: any) => any;
+  setDados: React.Dispatch<React.SetStateAction<ITarefas[]>>;
+  dadosOriginais: ITarefas[];
 }
 
-const Search = (props: ISearch) => {
+const Search:React.FC<ISearch> = ({setDados , dadosOriginais, placeholder}) => {
+  const [searchQuery, setSearchQuery] = useState<string>("");
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+    
+    const filteredData = dadosOriginais.filter(item => item.title.toLowerCase().includes(query.toLowerCase()) || item.background_color.toLowerCase().includes(query.toLowerCase()));
+
+    setDados(filteredData);
+
+  };
 
   return (
-    <div className={styles.nav}>
-      <div className={styles.logoNome}>
-        <img src={Logo}></img>
-        <h3 className={styles.title}>CoreNotes</h3>
-      </div>
       <div className={styles.inputSearch}>
-        <input type="text" placeholder={props.placeholder} value={props.value} />
+        <input type="text" placeholder={placeholder} value={searchQuery}   onChange={handleInputChange}/>
         <HiMagnifyingGlass />
       </div>
-      <RiDeleteBinLine />
-    </div>
   );
 };
 
