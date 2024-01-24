@@ -1,0 +1,55 @@
+.nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 1rem;
+    box-shadow: 0px 2px 11px 0px rgba(0,0,0,0.35);
+    -webkit-box-shadow: 0px 2px 11px 0px rgba(0,0,0,0.35);
+    -moz-box-shadow: 0px 2px 11px 0px rgba(0,0,0,0.35);
+ 
+
+    .inputSearch{
+        display: flex;
+        align-items: center;
+        background-color: #fff;
+        width: 50%;
+        height: 1.825rem;
+        border-radius: 5px;
+        border: 2px solid #E3E3E3;
+        padding: 0 10px 0 10px;
+        box-shadow: 2px 1px 2px 1px rgba(0,0,0,0.20);
+        -webkit-box-shadow: 2px 1px 2px 1px rgba(0,0,0,0.20);
+        -moz-box-shadow: 2px 1px 2px 1px rgba(0,0,0,0.20);
+        color: #6e787c;
+        margin: 0 1rem 0 0;
+
+        input{
+            background-color: transparent;
+            border: none;
+            height: 100%;
+            font-size: .825rem;
+            width: 100%;
+        }
+    
+        input::placeholder{
+            color: #aaaaaa;
+        }
+    }
+
+    .logoNome{
+        display: flex;
+        align-items: center;
+        margin: 0 1rem 0 0;
+
+        .title{
+            padding: 0;
+            margin: 0;
+            color: #6e787c;
+            font-weight:500;
+            font-size: 1rem;
+            margin: 0 0 0 .825rem;
+        }
+    }   
+
+}

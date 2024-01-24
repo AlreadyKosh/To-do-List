@@ -1,0 +1,33 @@
+@import '../../styles/break-points.scss';
+
+.Tarefas {
+  display: grid;
+
+  .main {
+    margin: auto;
+    display: grid;
+    width: 80%;
+  }
+
+  ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  @include tablet {
+
+  }
+
+  @include laptop {
+
+  }
+
+  @include desktop {
+
+  }
+
+  @include desktop-large {
+
+  }
+}
