@@ -13,13 +13,6 @@ $paddingCard: 1rem 1.5rem 1rem 1.5rem;
     -moz-box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.29);
     background-color: #ffff;
 
-    &:hover,
-    &:focus,
-    &:active {
-        color: #ffffff;
-        border-color: #f3f3f3;
-    }
-
     .top {
         display: flex;
         justify-content: space-between;
@@ -36,6 +29,12 @@ $paddingCard: 1rem 1.5rem 1rem 1.5rem;
 
         .bottomIcon {
             margin: $marginIcon;
+            &:hover,
+            &:focus,
+            &:active {
+                color: #777171;
+                border-color: #7a7676;
+            }
         }
 
         button {

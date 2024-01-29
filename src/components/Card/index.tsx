@@ -5,13 +5,15 @@ import { PiPaintBucket } from "react-icons/pi";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { IoIosStarOutline } from "react-icons/io";
 import { IconContext } from "react-icons";
-
+import { putColor, deleteCard } from "../../lib/api";
 import Modal from "../Modal";
 
 interface ICard {
+    id: number;
     title: string;
     content: string;
     initialColor: string;
+    onDelete: () => void;
 }
 
 const Card: React.FC<ICard> = (props: ICard) => {
@@ -20,9 +22,23 @@ const Card: React.FC<ICard> = (props: ICard) => {
     );
     const [showColorModal, setShowColorModal] = useState<boolean>(false);
 
-    const handleColorChange = (color: string) => {
-        setBackgroundColor((prevColor) => color);
-        setShowColorModal(false);
+    const handleColorChange = async (color: string) => {
+        try {
+            await putColor(props.id, color);
+            setBackgroundColor(color);
+            setShowColorModal(false);
+        } catch (error) {
+            console.error("Erro ao salvar a cor na API:", error);
+        }
+    };
+
+    const handleDelete = async () => {
+        try {
+            await deleteCard(props.id); //Chama a API para excluir no BD
+            props.onDelete(); //Chama a função para excluir na TELA
+        } catch (error) {
+            console.error("Erro ao excluir o card:", error);
+        }
     };
 
     return (
@@ -44,7 +60,10 @@ const Card: React.FC<ICard> = (props: ICard) => {
                         className={styles.bottomIcon}
                         onClick={() => setShowColorModal(true)}
                     />
-                    <RiDeleteBinLine className={styles.deleteIcon} />
+                    <RiDeleteBinLine
+                        className={styles.deleteIcon}
+                        onClick={handleDelete}
+                    />
                 </IconContext.Provider>
             </div>
             {showColorModal && (

@@ -20,6 +20,12 @@ const TarefasPage: React.FC = () => {
         fetchTarefas();
     }, []);
 
+    const handleCardDelete = (cardId: number) => {
+        setTarefasCopias(
+            tarefasCopia.filter((tarefasCopia) => tarefasCopia.id !== cardId)
+        );
+    };
+
     return (
         <div className={styles.Tarefas}>
             <div className={styles.top}>
@@ -32,9 +38,11 @@ const TarefasPage: React.FC = () => {
                         return (
                             <Card
                                 key={tarefa.id}
+                                id={tarefa.id}
                                 title={tarefa.title}
                                 content={tarefa.content}
                                 initialColor={tarefa.background_color}
+                                onDelete={() => handleCardDelete(tarefa.id)}
                             ></Card>
                         );
                     })}
