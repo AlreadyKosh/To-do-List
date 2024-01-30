@@ -33,19 +33,39 @@ const TarefasPage: React.FC = () => {
             </div>
             <main className={styles.main}>
                 <Button text="Add new vehicle" onClick={() => {}} />
+                <label>Favoritas</label>
                 <ul>
-                    {tarefasCopia.map((tarefa) => {
-                        return (
+                    {tarefasCopia
+                        .filter((tarefa) => tarefa.favorite)
+                        .map((tarefa) => (
                             <Card
                                 key={tarefa.id}
                                 id={tarefa.id}
                                 title={tarefa.title}
                                 content={tarefa.content}
+                                favorite={tarefa.favorite}
                                 initialColor={tarefa.background_color}
                                 onDelete={() => handleCardDelete(tarefa.id)}
-                            ></Card>
-                        );
-                    })}
+                            />
+                        ))}
+                </ul>
+                <label>Outras</label>
+                <ul>
+                    {tarefasCopia
+                        .filter((tarefa) => !tarefa.favorite)
+                        .map((tarefa) => {
+                            return (
+                                <Card
+                                    key={tarefa.id}
+                                    id={tarefa.id}
+                                    title={tarefa.title}
+                                    content={tarefa.content}
+                                    favorite={tarefa.favorite}
+                                    initialColor={tarefa.background_color}
+                                    onDelete={() => handleCardDelete(tarefa.id)}
+                                ></Card>
+                            );
+                        })}
                 </ul>
             </main>
         </div>

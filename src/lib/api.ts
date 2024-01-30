@@ -6,7 +6,13 @@ const get = async (path: string): Promise<any> => {
     return fetch(endpoint(path)).then((res) => res.json());
 };
 
-const put = async (path: string, color: string): Promise<any> => {
+const put = async (
+    path: string,
+    title: string,
+    content: string,
+    favorite: boolean,
+    color: string
+): Promise<any> => {
     return fetch(endpoint(path), {
         method: "PUT",
         headers: {
@@ -14,6 +20,9 @@ const put = async (path: string, color: string): Promise<any> => {
             // Adicione cabeçalhos de autenticação ou outros cabeçalhos necessários aqui
         },
         body: JSON.stringify({
+            title: title,
+            content: content,
+            favorite: favorite,
             background_color: color,
         }),
     })
@@ -48,8 +57,14 @@ export const getTarefas = async () => {
     return get("/api/tarefas");
 };
 
-export const putColor = async (id: number, color: string) => {
-    return put(`/api/tarefas/${id}`, color);
+export const updateTarefa = async (
+    id: number,
+    title: string,
+    content: string,
+    favorite: boolean,
+    color: string
+) => {
+    return put(`/api/tarefas/${id}`, title, content, favorite, color);
 };
 
 export const deleteCard = async (id: number) => {

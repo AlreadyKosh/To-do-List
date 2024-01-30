@@ -58,6 +58,10 @@ $paddingCard: 1rem 1.5rem 1rem 1.5rem;
     }
 }
 
+.Card:first-child {
+    margin-top: 1rem;
+}
+
 .bae2ff {
     background-color: #bae2ff;
 }

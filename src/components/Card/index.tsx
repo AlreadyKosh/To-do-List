@@ -5,13 +5,14 @@ import { PiPaintBucket } from "react-icons/pi";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { IoIosStarOutline } from "react-icons/io";
 import { IconContext } from "react-icons";
-import { putColor, deleteCard } from "../../lib/api";
+import { updateTarefa, deleteCard } from "../../lib/api";
 import Modal from "../Modal";
 
 interface ICard {
     id: number;
     title: string;
     content: string;
+    favorite: boolean;
     initialColor: string;
     onDelete: () => void;
 }
@@ -21,12 +22,36 @@ const Card: React.FC<ICard> = (props: ICard) => {
         props.initialColor
     );
     const [showColorModal, setShowColorModal] = useState<boolean>(false);
+    const [changeFavorite, setChangeFavorite] = useState<boolean>(
+        props.favorite
+    );
 
     const handleColorChange = async (color: string) => {
         try {
-            await putColor(props.id, color);
+            await updateTarefa(
+                props.id,
+                props.title,
+                props.content,
+                props.favorite,
+                color
+            );
             setBackgroundColor(color);
             setShowColorModal(false);
+        } catch (error) {
+            console.error("Erro ao salvar a cor na API:", error);
+        }
+    };
+
+    const handleFavoriteChange = async (favorite: boolean) => {
+        try {
+            await updateTarefa(
+                props.id,
+                props.title,
+                props.content,
+                favorite,
+                props.initialColor
+            );
+            setChangeFavorite(favorite);
         } catch (error) {
             console.error("Erro ao salvar a cor na API:", error);
         }
