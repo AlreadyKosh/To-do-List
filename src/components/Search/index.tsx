@@ -24,12 +24,15 @@ const Search: React.FC<ISearch> = ({
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const query = e.target.value;
         setSearchQuery(query);
-        const filteredData = dadosOriginais.filter((item) =>
-            item.title.toLowerCase().includes(query.toLowerCase()) ||
-            item.background_color.toLowerCase().includes(query.toLowerCase()) ||
+        const filteredData = dadosOriginais.filter(
+            (item) =>
+                item.title.toLowerCase().includes(query.toLowerCase()) ||
+                item.background_color
+                    .toLowerCase()
+                    .includes(query.toLowerCase()) /*||
             query === "favoritos"
                 ? item.favorite
-                : null
+                : !item.favorite */ //Não retorna os itens que não sao favoritos
         );
 
         setDados(filteredData);

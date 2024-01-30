@@ -59,7 +59,11 @@ $paddingCard: 1rem 1.5rem 1rem 1.5rem;
 }
 
 .Card:first-child {
-    margin-top: 1rem;
+    margin: 1rem 0 0 0;
+}
+
+.Card:last-child {
+    margin-bottom: 2rem;
 }
 
 .bae2ff {

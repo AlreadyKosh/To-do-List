@@ -3,7 +3,7 @@ import styles from "./Card.module.scss";
 import { HiOutlinePencil } from "react-icons/hi";
 import { PiPaintBucket } from "react-icons/pi";
 import { RiDeleteBinLine } from "react-icons/ri";
-import { IoIosStarOutline } from "react-icons/io";
+import { IoIosStarOutline, IoIosStar } from "react-icons/io";
 import { IconContext } from "react-icons";
 import { updateTarefa, deleteCard } from "../../lib/api";
 import Modal from "../Modal";
@@ -15,6 +15,7 @@ interface ICard {
     favorite: boolean;
     initialColor: string;
     onDelete: () => void;
+    onReloadData: () => void;
 }
 
 const Card: React.FC<ICard> = (props: ICard) => {
@@ -52,6 +53,9 @@ const Card: React.FC<ICard> = (props: ICard) => {
                 props.initialColor
             );
             setChangeFavorite(favorite);
+            if (props.onReloadData) {
+                props.onReloadData();
+            }
         } catch (error) {
             console.error("Erro ao salvar a cor na API:", error);
         }
@@ -71,7 +75,19 @@ const Card: React.FC<ICard> = (props: ICard) => {
             <div className={styles.top}>
                 <h2>{props.title}</h2>
                 <IconContext.Provider value={{ size: "1.3em" }}>
-                    <IoIosStarOutline />
+                    {changeFavorite ? (
+                        <IoIosStar
+                            onClick={() =>
+                                handleFavoriteChange(!changeFavorite)
+                            }
+                        />
+                    ) : (
+                        <IoIosStarOutline
+                            onClick={() =>
+                                handleFavoriteChange(!changeFavorite)
+                            }
+                        />
+                    )}
                 </IconContext.Provider>
             </div>
             <div>

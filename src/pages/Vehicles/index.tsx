@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getTarefas } from "../../lib/api";
 import { Button, Card, Nav } from "../../components";
-import styles from "./Vehicles.module.scss";
+import styles from "./Tarefas.module.scss";
 import { ITarefas } from "../../types/Tarefa";
 
 const TarefasPage: React.FC = () => {
@@ -20,10 +20,15 @@ const TarefasPage: React.FC = () => {
         fetchTarefas();
     }, []);
 
-    const handleCardDelete = (cardId: number) => {
-        setTarefasCopias(
-            tarefasCopia.filter((tarefasCopia) => tarefasCopia.id !== cardId)
-        );
+    useEffect(() => {
+        // Este efeito é acionado sempre que tarefas for alterado
+        setTarefasCopias(tarefas);
+    }, [tarefas]);
+
+    const handleReloadData = async () => {
+        const payload = await getTarefas();
+        setTarefas(payload.data);
+        setTarefasCopias(payload.data);
     };
 
     return (
@@ -45,11 +50,12 @@ const TarefasPage: React.FC = () => {
                                 content={tarefa.content}
                                 favorite={tarefa.favorite}
                                 initialColor={tarefa.background_color}
-                                onDelete={() => handleCardDelete(tarefa.id)}
+                                onDelete={handleReloadData}
+                                onReloadData={handleReloadData}
                             />
                         ))}
                 </ul>
-                <label>Outras</label>
+                <label className={styles.labelOutras}>Outras</label>
                 <ul>
                     {tarefasCopia
                         .filter((tarefa) => !tarefa.favorite)
@@ -62,8 +68,9 @@ const TarefasPage: React.FC = () => {
                                     content={tarefa.content}
                                     favorite={tarefa.favorite}
                                     initialColor={tarefa.background_color}
-                                    onDelete={() => handleCardDelete(tarefa.id)}
-                                ></Card>
+                                    onDelete={handleReloadData}
+                                    onReloadData={handleReloadData}
+                                />
                             );
                         })}
                 </ul>
