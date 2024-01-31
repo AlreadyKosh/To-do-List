@@ -14,7 +14,7 @@ const Nav: React.FC<INav> = ({ setDados, dadosOriginais }) => {
         <div className={styles.nav}>
             <div className={styles.logoNome}>
                 <img src={Logo} alt="Logo"></img>
-                <h3 className={styles.title}>CoreNotes</h3>
+                <h3 className={styles.title}>NixNotes</h3>
             </div>
             <Search
                 setDados={setDados}

@@ -26,6 +26,9 @@ const Card: React.FC<ICard> = (props: ICard) => {
     const [changeFavorite, setChangeFavorite] = useState<boolean>(
         props.favorite
     );
+    const [isEditing, setIsEditing] = useState<boolean>(false);
+    const [editedTitle, setEditedTitle] = useState<string>(props.title);
+    const [editedContent, setEditedContent] = useState<string>(props.content);
 
     const handleColorChange = async (color: string) => {
         try {
@@ -70,37 +73,82 @@ const Card: React.FC<ICard> = (props: ICard) => {
         }
     };
 
+    const handleEditClick = () => {
+        setIsEditing(true);
+    };
+
+    const handleSaveClick = async () => {
+        try {
+            await updateTarefa(
+                props.id,
+                editedTitle,
+                editedContent,
+                props.favorite,
+                backgroundColor
+            );
+            setIsEditing(false);
+        } catch (error) {
+            console.error("Erro ao salvar a edição na API:", error);
+        }
+    };
+
     return (
         <div className={`${styles.Card} ${styles[backgroundColor]}`}>
             <div className={styles.top}>
-                <h2>{props.title}</h2>
-                <IconContext.Provider value={{ size: "1.3em" }}>
-                    {changeFavorite ? (
-                        <IoIosStar
-                            onClick={() =>
-                                handleFavoriteChange(!changeFavorite)
-                            }
+                {isEditing ? (
+                    <>
+                        <input
+                            type="text"
+                            value={editedTitle}
+                            onChange={(e) => setEditedTitle(e.target.value)}
+                            className={styles.inputTitle}
                         />
-                    ) : (
-                        <IoIosStarOutline
-                            onClick={() =>
-                                handleFavoriteChange(!changeFavorite)
-                            }
-                        />
-                    )}
-                </IconContext.Provider>
+                    </>
+                ) : (
+                    <>
+                        <h2>{props.title}</h2>
+                        <IconContext.Provider value={{ size: "1.3em" }}>
+                            {props.favorite ? (
+                                <IoIosStar
+                                    onClick={() =>
+                                        handleFavoriteChange(!changeFavorite)
+                                    }
+                                />
+                            ) : (
+                                <IoIosStarOutline
+                                    onClick={() =>
+                                        handleFavoriteChange(!changeFavorite)
+                                    }
+                                />
+                            )}
+                        </IconContext.Provider>
+                    </>
+                )}
             </div>
-            <div>
-                <p>{props.content}</p>
+            <div className={styles.content}>
+                {isEditing ? (
+                    <>
+                        <textarea
+                            value={editedContent}
+                            onChange={(e) => setEditedContent(e.target.value)}
+                            className={styles.inputContent}
+                        />
+                    </>
+                ) : (
+                    <p>{props.content}</p>
+                )}
             </div>
             <div className={styles.bottom}>
                 <IconContext.Provider value={{ size: "1.3em" }}>
-                    <HiOutlinePencil className={styles.bottomIcon} />
-
                     <PiPaintBucket
                         className={styles.bottomIcon}
                         onClick={() => setShowColorModal(true)}
                     />
+                    {isEditing ? (
+                        <button onClick={handleSaveClick}>Salvar</button>
+                    ) : (
+                        <HiOutlinePencil onClick={handleEditClick} />
+                    )}
                     <RiDeleteBinLine
                         className={styles.deleteIcon}
                         onClick={handleDelete}

@@ -1,7 +1,13 @@
 @import "../../styles/break-points.scss";
 
 .Tarefas {
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+
+    .top {
+        width: 100%;
+    }
 
     .main {
         margin: auto;
