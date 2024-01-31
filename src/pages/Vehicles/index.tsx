@@ -18,6 +18,10 @@ const TarefasPage: React.FC = () => {
         fetchTarefas();
     }, []);
 
+    const handleAddCard = (newCard: any) => {
+        setTarefasCopias((prevCards) => [...prevCards, newCard]);
+    };
+
     const handleReloadData = async () => {
         const payload = await getTarefas();
         setTarefas(payload.data);
@@ -30,7 +34,7 @@ const TarefasPage: React.FC = () => {
                 <Nav setDados={setTarefasCopias} dadosOriginais={tarefas} />
             </div>
             <main className={styles.main}>
-                <Button text="Add new vehicle" onClick={() => {}} />
+                <Button onReloadData={handleReloadData} />
                 <label>Favoritas</label>
                 <ul>
                     {tarefasCopia

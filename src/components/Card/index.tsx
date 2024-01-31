@@ -4,6 +4,7 @@ import { HiOutlinePencil } from "react-icons/hi";
 import { PiPaintBucket } from "react-icons/pi";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { IoIosStarOutline, IoIosStar } from "react-icons/io";
+import { IoCheckmarkSharp } from "react-icons/io5";
 import { IconContext } from "react-icons";
 import { updateTarefa, deleteCard } from "../../lib/api";
 import Modal from "../Modal";
@@ -67,7 +68,9 @@ const Card: React.FC<ICard> = (props: ICard) => {
     const handleDelete = async () => {
         try {
             await deleteCard(props.id); //Chama a API para excluir no BD
-            props.onDelete(); //Chama a função para excluir na TELA
+            if (props.onReloadData) {
+                props.onReloadData();
+            } //Chama a função para excluir na TELA
         } catch (error) {
             console.error("Erro ao excluir o card:", error);
         }
@@ -87,6 +90,10 @@ const Card: React.FC<ICard> = (props: ICard) => {
                 backgroundColor
             );
             setIsEditing(false);
+
+            if (props.onReloadData) {
+                props.onReloadData();
+            }
         } catch (error) {
             console.error("Erro ao salvar a edição na API:", error);
         }
@@ -145,7 +152,7 @@ const Card: React.FC<ICard> = (props: ICard) => {
                         onClick={() => setShowColorModal(true)}
                     />
                     {isEditing ? (
-                        <button onClick={handleSaveClick}>Salvar</button>
+                        <IoCheckmarkSharp onClick={handleSaveClick} />
                     ) : (
                         <HiOutlinePencil onClick={handleEditClick} />
                     )}
