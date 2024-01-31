@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState, useEffect } from "react";
+import React, { ChangeEvent, useState } from "react";
 import styles from "./Search.module.scss";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { ITarefas } from "../../types/Tarefa";
@@ -29,10 +29,7 @@ const Search: React.FC<ISearch> = ({
                 item.title.toLowerCase().includes(query.toLowerCase()) ||
                 item.background_color
                     .toLowerCase()
-                    .includes(query.toLowerCase()) /*||
-            query === "favoritos"
-                ? item.favorite
-                : !item.favorite */ //Não retorna os itens que não sao favoritos
+                    .includes(query.toLowerCase())
         );
 
         setDados(filteredData);

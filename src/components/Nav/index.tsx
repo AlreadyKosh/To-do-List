@@ -1,6 +1,5 @@
-import React, { ChangeEvent, useState } from "react";
+import React from "react";
 import styles from "./Nav.module.scss";
-import { RiDeleteBinLine } from "react-icons/ri";
 import Search from "../Search";
 import Logo from "../../assets/img/image8.png";
 import { ITarefas } from "../../types/Tarefa";
@@ -14,7 +13,7 @@ const Nav: React.FC<INav> = ({ setDados, dadosOriginais }) => {
     return (
         <div className={styles.nav}>
             <div className={styles.logoNome}>
-                <img src={Logo}></img>
+                <img src={Logo} alt="Logo"></img>
                 <h3 className={styles.title}>CoreNotes</h3>
             </div>
             <Search

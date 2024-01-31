@@ -15,15 +15,8 @@ const TarefasPage: React.FC = () => {
             setTarefas(payload.data);
             setTarefasCopias(payload.data);
         };
-        console.log(tarefas);
-
         fetchTarefas();
     }, []);
-
-    useEffect(() => {
-        // Este efeito é acionado sempre que tarefas for alterado
-        setTarefasCopias(tarefas);
-    }, [tarefas]);
 
     const handleReloadData = async () => {
         const payload = await getTarefas();
