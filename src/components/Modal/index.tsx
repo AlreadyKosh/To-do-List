@@ -16,53 +16,53 @@ const ColorModal = (props: Modal) => {
             <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
                 <div className={styles.modalTop}>
                     <button
-                        onClick={() => handleColorClick("bae2ff")}
+                        onClick={() => handleColorClick("azul-claro")}
                         style={{ background: "#bae2ff" }}
                     ></button>
                     <button
-                        onClick={() => props.onSelectColor("b9ffdd")}
+                        onClick={() => props.onSelectColor("verde-claro")}
                         style={{ background: "#b9ffdd" }}
                     ></button>
                     <button
-                        onClick={() => handleColorClick("ffe8ac")}
+                        onClick={() => handleColorClick("amarelo")}
                         style={{ background: "#ffe8ac" }}
                     ></button>
                     <button
-                        onClick={() => props.onSelectColor("ffcab9")}
+                        onClick={() => props.onSelectColor("rosa-claro")}
                         style={{ background: "#ffcab9" }}
                     ></button>
                     <button
-                        onClick={() => handleColorClick("f99494")}
+                        onClick={() => handleColorClick("vermelho")}
                         style={{ background: "#f99494" }}
                     ></button>
                     <button
-                        onClick={() => props.onSelectColor("B9dd6ff")}
+                        onClick={() => props.onSelectColor("azul-escuro")}
                         style={{ background: "#9dd6ff" }}
                     ></button>
                 </div>
                 <div className={styles.modalTop}>
                     <button
-                        onClick={() => handleColorClick("eca2ff")}
+                        onClick={() => handleColorClick("rosa")}
                         style={{ background: "#eca2ff" }}
                     ></button>
                     <button
-                        onClick={() => props.onSelectColor("daff8b")}
+                        onClick={() => props.onSelectColor("verde-limao")}
                         style={{ background: "#daff8b" }}
                     ></button>
                     <button
-                        onClick={() => handleColorClick("ffa285")}
+                        onClick={() => handleColorClick("laranja")}
                         style={{ background: "#ffa285" }}
                     ></button>
                     <button
-                        onClick={() => props.onSelectColor("cdcdcd")}
+                        onClick={() => props.onSelectColor("cinza")}
                         style={{ background: "#cdcdcd" }}
                     ></button>
                     <button
-                        onClick={() => handleColorClick("G979797")}
+                        onClick={() => handleColorClick("preto")}
                         style={{ background: "#979797" }}
                     ></button>
                     <button
-                        onClick={() => props.onSelectColor("a99a7c")}
+                        onClick={() => props.onSelectColor("marrom")}
                         style={{ background: "#a99a7c" }}
                     ></button>
                 </div>

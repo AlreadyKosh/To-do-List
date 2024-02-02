@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect } from "react";
 import styles from "./Search.module.scss";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { ITarefas } from "../../types/Tarefa";
@@ -7,24 +7,20 @@ interface ISearch {
     placeholder: string;
     setDados: React.Dispatch<React.SetStateAction<ITarefas[]>>;
     dadosOriginais: ITarefas[];
+    searchQuery: string;
+    setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Search: React.FC<ISearch> = ({
-    setDados,
-    dadosOriginais,
-    placeholder,
-}) => {
-    const [searchQuery, setSearchQuery] = useState<string>("");
-
+const Search = (props: ISearch) => {
     const handleClearSearch = () => {
-        setSearchQuery("");
-        setDados(dadosOriginais); // Restaura os dados originais quando o input é limpo
+        props.setSearchQuery("");
+        props.setDados(props.dadosOriginais);
     };
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const query = e.target.value;
-        setSearchQuery(query);
-        const filteredData = dadosOriginais.filter(
+        props.setSearchQuery(query);
+        const filteredData = props.dadosOriginais.filter(
             (item) =>
                 item.title.toLowerCase().includes(query.toLowerCase()) ||
                 item.background_color
@@ -32,7 +28,7 @@ const Search: React.FC<ISearch> = ({
                     .includes(query.toLowerCase())
         );
 
-        setDados(filteredData);
+        props.setDados(filteredData);
     };
 
     return (
@@ -40,13 +36,15 @@ const Search: React.FC<ISearch> = ({
             <div className={styles.inputSearch}>
                 <input
                     type="text"
-                    placeholder={placeholder}
-                    value={searchQuery}
+                    placeholder={props.placeholder}
+                    value={props.searchQuery}
                     onChange={handleInputChange}
                 />
                 <HiMagnifyingGlass />
             </div>
-            {searchQuery && <button onClick={handleClearSearch}>X</button>}
+            {props.searchQuery && (
+                <button onClick={handleClearSearch}>X</button>
+            )}
         </div>
     );
 };

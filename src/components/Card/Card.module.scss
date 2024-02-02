@@ -5,7 +5,7 @@ $fontFamily: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     sans-serif;
 
 .Card {
-    margin-top: 2rem;
+    margin-top: 1rem;
     text-align: left;
     color: inherit;
     text-decoration: none;
@@ -30,6 +30,8 @@ $fontFamily: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
             font-size: 1rem;
             font-weight: bold;
             font-family: $fontFamily;
+            resize: none;
+            overflow: hidden;
         }
     }
 
@@ -43,6 +45,8 @@ $fontFamily: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
             font-size: 1rem;
             width: 100%;
             font-family: $fontFamily;
+            resize: none;
+            overflow: hidden;
         }
 
         p {
@@ -83,58 +87,50 @@ $fontFamily: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     }
 }
 
-.Card:first-child {
-    margin: 1rem 0 0 0;
-}
-
-.Card:last-child {
-    margin-bottom: 2rem;
-}
-
-.bae2ff {
+.azul-claro {
     background-color: #bae2ff;
 }
 
-.b9ffdd {
+.verde-claro {
     background-color: #b9ffdd;
 }
 
-.ffe8ac {
+.amarelo {
     background-color: #ffe8ac;
 }
 
-.ffcab9 {
+.rosa-claro {
     background-color: #ffcab9;
 }
 
-.f99494 {
+.vermelho {
     background-color: #f99494;
 }
 
-.B9dd6ff {
+.azul-escuro {
     background-color: #9dd6ff;
 }
 
-.eca2ff {
+.rosa {
     background-color: #eca2ff;
 }
 
-.daff8b {
+.verde-limao {
     background-color: #daff8b;
 }
 
-.ffa285 {
+.laranja {
     background-color: #ffa285;
 }
 
-.cdcdcd {
+.cinza {
     background-color: #cdcdcd;
 }
 
-.G979797 {
+.preto {
     background-color: #979797;
 }
 
-.a99a7c {
+.marrom {
     background-color: #a99a7c;
 }

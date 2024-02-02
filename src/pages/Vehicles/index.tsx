@@ -7,37 +7,39 @@ import { ITarefas } from "../../types/Tarefa";
 const TarefasPage: React.FC = () => {
     const [tarefas, setTarefas] = React.useState<ITarefas[]>([]);
     const [tarefasCopia, setTarefasCopias] = useState<ITarefas[]>([]);
+    const [searchQuery, setSearchQuery] = useState<string>("");
 
     useEffect(() => {
         const fetchTarefas = async () => {
             const payload = await getTarefas();
-
             setTarefas(payload.data);
             setTarefasCopias(payload.data);
         };
         fetchTarefas();
     }, []);
 
-    const handleAddCard = (newCard: any) => {
-        setTarefasCopias((prevCards) => [...prevCards, newCard]);
-    };
-
     const handleReloadData = async () => {
         const payload = await getTarefas();
         setTarefas(payload.data);
         setTarefasCopias(payload.data);
+        setSearchQuery(""); // Limpa o search quando a função é chamada
     };
 
     return (
         <div className={styles.Tarefas}>
             <div className={styles.top}>
-                <Nav setDados={setTarefasCopias} dadosOriginais={tarefas} />
+                <Nav
+                    setDados={setTarefas}
+                    dadosOriginais={tarefasCopia}
+                    searchQuery={searchQuery}
+                    setSearchQuery={setSearchQuery}
+                />
             </div>
             <main className={styles.main}>
                 <Button onReloadData={handleReloadData} />
                 <label>Favoritas</label>
-                <ul>
-                    {tarefasCopia
+                <ul className={styles.cardsFavoritos}>
+                    {tarefas
                         .filter((tarefa) => tarefa.favorite)
                         .map((tarefa) => (
                             <Card
@@ -47,14 +49,13 @@ const TarefasPage: React.FC = () => {
                                 content={tarefa.content}
                                 favorite={tarefa.favorite}
                                 initialColor={tarefa.background_color}
-                                onDelete={handleReloadData}
                                 onReloadData={handleReloadData}
                             />
                         ))}
                 </ul>
                 <label className={styles.labelOutras}>Outras</label>
-                <ul>
-                    {tarefasCopia
+                <ul className={styles.cards}>
+                    {tarefas
                         .filter((tarefa) => !tarefa.favorite)
                         .map((tarefa) => {
                             return (
@@ -65,7 +66,6 @@ const TarefasPage: React.FC = () => {
                                     content={tarefa.content}
                                     favorite={tarefa.favorite}
                                     initialColor={tarefa.background_color}
-                                    onDelete={handleReloadData}
                                     onReloadData={handleReloadData}
                                 />
                             );

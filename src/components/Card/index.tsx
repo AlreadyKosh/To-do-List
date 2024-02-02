@@ -15,7 +15,6 @@ interface ICard {
     content: string;
     favorite: boolean;
     initialColor: string;
-    onDelete: () => void;
     onReloadData: () => void;
 }
 
@@ -42,6 +41,10 @@ const Card: React.FC<ICard> = (props: ICard) => {
             );
             setBackgroundColor(color);
             setShowColorModal(false);
+
+            if (props.onReloadData) {
+                props.onReloadData();
+            }
         } catch (error) {
             console.error("Erro ao salvar a cor na API:", error);
         }
@@ -100,7 +103,7 @@ const Card: React.FC<ICard> = (props: ICard) => {
     };
 
     return (
-        <div className={`${styles.Card} ${styles[backgroundColor]}`}>
+        <li className={`${styles.Card} ${styles[backgroundColor]}`}>
             <div className={styles.top}>
                 {isEditing ? (
                     <>
@@ -139,6 +142,7 @@ const Card: React.FC<ICard> = (props: ICard) => {
                             value={editedContent}
                             onChange={(e) => setEditedContent(e.target.value)}
                             className={styles.inputContent}
+                            maxLength={900}
                         />
                     </>
                 ) : (
@@ -168,7 +172,7 @@ const Card: React.FC<ICard> = (props: ICard) => {
                     onSelectColor={handleColorChange}
                 />
             )}
-        </div>
+        </li>
     );
 };
 

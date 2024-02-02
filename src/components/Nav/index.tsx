@@ -7,9 +7,11 @@ import { ITarefas } from "../../types/Tarefa";
 interface INav {
     setDados: React.Dispatch<React.SetStateAction<ITarefas[]>>;
     dadosOriginais: ITarefas[];
+    searchQuery: string;
+    setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Nav: React.FC<INav> = ({ setDados, dadosOriginais }) => {
+const Nav = (props: INav) => {
     return (
         <div className={styles.nav}>
             <div className={styles.logoNome}>
@@ -17,9 +19,11 @@ const Nav: React.FC<INav> = ({ setDados, dadosOriginais }) => {
                 <h3 className={styles.title}>NixNotes</h3>
             </div>
             <Search
-                setDados={setDados}
+                setDados={props.setDados}
                 placeholder="Pesquise a tarefa"
-                dadosOriginais={dadosOriginais}
+                dadosOriginais={props.dadosOriginais}
+                searchQuery={props.searchQuery}
+                setSearchQuery={props.setSearchQuery}
             />
         </div>
     );
