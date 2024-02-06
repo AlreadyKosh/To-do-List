@@ -112,12 +112,14 @@ const Card: React.FC<ICard> = (props: ICard) => {
                             value={editedTitle}
                             onChange={(e) => setEditedTitle(e.target.value)}
                             className={styles.inputTitle}
+                            autoFocus
+                            maxLength={50}
                         />
                     </>
                 ) : (
                     <>
                         <h2>{props.title}</h2>
-                        <IconContext.Provider value={{ size: "1.3em" }}>
+                        <div className={styles.iconStyle}>
                             {props.favorite ? (
                                 <IoIosStar
                                     onClick={() =>
@@ -131,7 +133,7 @@ const Card: React.FC<ICard> = (props: ICard) => {
                                     }
                                 />
                             )}
-                        </IconContext.Provider>
+                        </div>
                     </>
                 )}
             </div>
@@ -142,7 +144,7 @@ const Card: React.FC<ICard> = (props: ICard) => {
                             value={editedContent}
                             onChange={(e) => setEditedContent(e.target.value)}
                             className={styles.inputContent}
-                            maxLength={900}
+                            maxLength={1200}
                         />
                     </>
                 ) : (

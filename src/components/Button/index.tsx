@@ -51,11 +51,6 @@ const Button = (props: INewCardForm) => {
         }
     };
 
-    const calculateRows = () => {
-        const rowCount = newCardContent.split("\n").length;
-        return Math.max(rowCount, 3);
-    };
-
     return (
         <a
             className={`${styles.Button} ${styles[newCardBackgroundColor]}`}
@@ -71,6 +66,8 @@ const Button = (props: INewCardForm) => {
                             value={newCardTitle}
                             onChange={(e) => setNewCardTitle(e.target.value)}
                             className={styles.inputTitle}
+                            autoFocus
+                            maxLength={50}
                         />
                     </>
                 ) : (
@@ -94,7 +91,7 @@ const Button = (props: INewCardForm) => {
                             value={newCardContent}
                             onChange={(e) => setNewCardContent(e.target.value)}
                             className={styles.inputContent}
-                            rows={calculateRows()}
+                            maxLength={1200}
                         />
                     </>
                 ) : (

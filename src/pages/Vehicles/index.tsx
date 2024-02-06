@@ -22,7 +22,7 @@ const TarefasPage: React.FC = () => {
         const payload = await getTarefas();
         setTarefas(payload.data);
         setTarefasCopias(payload.data);
-        setSearchQuery(""); // Limpa o search quando a função é chamada
+        setSearchQuery("");
     };
 
     return (
