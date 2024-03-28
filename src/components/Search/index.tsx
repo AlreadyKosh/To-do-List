@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect } from "react";
+import React, { ChangeEvent } from "react";
 import styles from "./Search.module.scss";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { ITarefas } from "../../types/Tarefa";

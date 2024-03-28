@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./Modal.module.scss"; // Crie o arquivo CSS para os estilos do modal
 
 interface Modal {
