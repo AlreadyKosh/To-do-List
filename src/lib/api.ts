@@ -1,4 +1,4 @@
-const API = "http://localhost:3333";
+const API = "https://backend-todolist-haa2.onrender.com/";
 
 const endpoint = (path: string): string => API + path;
 
@@ -83,7 +83,7 @@ const drop = async (path: string): Promise<any> => {
 };
 
 export const getTarefas = async () => {
-    return get("/api/tarefas");
+    return get("api/tarefas");
 };
 
 export const updateTarefa = async (
@@ -93,11 +93,11 @@ export const updateTarefa = async (
     favorite: boolean,
     color: string
 ) => {
-    return put(`/api/tarefas/${id}`, title, content, favorite, color);
+    return put(`api/tarefas/${id}`, title, content, favorite, color);
 };
 
 export const deleteCard = async (id: number) => {
-    return drop(`/api/tarefas/${id}`);
+    return drop(`api/tarefas/${id}`);
 };
 
 export const createNewCard = async (
@@ -106,5 +106,5 @@ export const createNewCard = async (
     favorite: boolean,
     color: string
 ) => {
-    return post(`/api/tarefas/`, title, content, favorite, color);
+    return post(`api/tarefas/`, title, content, favorite, color);
 };
